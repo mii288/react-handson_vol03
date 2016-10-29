@@ -6,6 +6,9 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 
+import Home from './containers/home';
+import List from './containers/list';
+
 import './index.css';
 
 injectTapEventPlugin();
