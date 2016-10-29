@@ -27,29 +27,23 @@ class Root extends Component {
     this.setState({ showMenu });
   }
 
+  // ルーティングの設定をJSXで書く
   render() {
     return (
-      <div>
-        <MuiThemeProvider>
-          <div>
-            <AppBar
-              title="React HandsOn vol.03"
-              onLeftIconButtonTouchTap={() => this.onMenuStateChange(true)}
-            />
-            <h1>Hello</h1>
+      <MuiThemeProvider>
+        // 全体をRouterで囲む
+        <Router history={hashHistory}>
+          <Route path="/" component={App}>
+            // ネスト /list/a
+            <IndexRoute component={Home} />
 
-            <Drawer
-              docked={false}
-              open={this.state.showMenu}
-              width={200}
-              onRequestChange={show => this.onMenuStateChange(show)}
-            >
-              <MenuItem>Home</MenuItem>
-              <MenuItem>List</MenuItem>
-            </Drawer>
-          </div>
-        </MuiThemeProvider>
-      </div>
+            <Route path="/list" component={List}>
+              <IndexRoute component={Detail} />
+              <Route path=":id" component={Detail} />
+            </Route>
+          </Route>
+        </Router>
+      </MuiThemeProvider>
     );
   }
 }
